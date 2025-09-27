@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
-import { MenuProps } from 'ant-design-vue';
+import { useMenu } from './composable/useMenu';
+
+const { items } = useMenu()
+const value1 = ref('consultor');
 </script>
 
 <template>
-  <a-menu v-model:selectedKeys="current" mode="horizontal" :items="items" />
+  <div class="mx-10 mt-4">
+    <a-menu mode="horizontal" :items="items" />
+    <div class="mt-4">
+      <a-radio-group v-model:value="value1">
+        <a-radio-button value="clientes">Cliente</a-radio-button>
+        <a-radio-button value="consultor">Consultor</a-radio-button>
+      </a-radio-group>
+    </div>
+  </div>
+
 </template>
 
 <style scoped></style>
