@@ -1,20 +1,32 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL; // Para Vite
+export const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
-export function useFetch<T = never>(url: string, config: AxiosRequestConfig = {}) {
+axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axiosInstance.defaults.headers.get.Accept = 'application/json';
+
+export function useFetch<T = never>(url: string) {
   const data = ref<T | null>(null);
   const error = ref<string | null>(null);
   const loading = ref(false);
 
-  const fetchData = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fetchData = async <T>(endpoint = url, params?: Record<string, any>,
+    config?: AxiosRequestConfig,) => {
     loading.value = true;
     error.value = null;
     try {
-      const response = await axios({
-        url: `${API_URL}${url}`,
-        ...config
-      });
+      const requestConfig: AxiosRequestConfig = {
+        ...config,
+        params: params,
+      };
+      const response = await axiosInstance.get<T>(
+        endpoint,
+        requestConfig
+      );
+
       data.value = response.data;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
