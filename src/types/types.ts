@@ -2,7 +2,7 @@ export type Consultor = {
   co_usuario: string,
   no_usuario: string
 }
-type MesData = {
+type MonthlyData = {
   ano: number;
   mes: number;
   valor_total: number;
@@ -15,9 +15,9 @@ type MesData = {
   lucro: number;
 };
 
-// Tipo para una persona
-export type PersonData = {
+// Tipo para un Usuario
+export type UserData = {
   name: string;
-  mensual: MesData[];
+  mensual: MonthlyData[];
   total: [number, number, number, number];
 };
