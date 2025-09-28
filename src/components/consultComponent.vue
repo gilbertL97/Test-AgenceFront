@@ -11,18 +11,16 @@ import type { Consultor } from '@/types/types';
 type RangeValue = [Dayjs, Dayjs];
 const dateRange = ref<RangeValue>();
 const selectedConsultors = ref<string[]>([]);
-const props = defineProps<{
+defineProps<{
   isLoading: boolean;
   data: Consultor[];
 }>();
-const emits = defineEmits(['SelectedConsultors', 'DateRange', 'Action']);
-const verifiConsultors = (selected: number[]) => {
-  selected.map((idx) =>
-    selectedConsultors.value.push(props.data[idx]?.co_usuario));
-  //emits('SelectedConsultors', coUsuarios);
+const emits = defineEmits(['action']);
+const verifiConsultors = (selected: string[]) => {
+  selectedConsultors.value = selected;
 }
 const handleAction = (action: string) => {
-  emits('Action', {
+  emits('action', {
     action,
     consultors: selectedConsultors.value,
     dateRange: dateRange.value

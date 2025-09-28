@@ -31,7 +31,7 @@ const props = defineProps<{
 
 // Manejador del evento @change del Transfer
 const onChange = (nextTargetKeys: string[]) => {
-  emits('SelectedConsultors', nextTargetKeys.map(Number)); // Logs para depuración
+  emits('SelectedConsultors', nextTargetKeys); // Logs para depuración
 };
 
 // Función personalizada para filtrar elementos en el Transfer
@@ -45,7 +45,7 @@ const getRowSelection = ({
   selectedKeys,
   onItemSelectAll,
   onItemSelect,
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: Record<string, any>) => {
   return {
     // Propiedades del checkbox
