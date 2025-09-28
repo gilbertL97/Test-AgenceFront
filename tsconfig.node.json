@@ -6,8 +6,7 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
-    "eslint.config.*",
-    "./auto-imports.d.ts"
+    "eslint.config.*"
   ],
   "compilerOptions": {
     "noEmit": true,
