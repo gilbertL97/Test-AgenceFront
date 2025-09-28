@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 
 import type { Consultor } from '@/types/types';
-import { ref, watch } from 'vue';
 const emits = defineEmits(['SelectedConsultors']);
 type DataTransfer = {
   // Se usa para que los datos tengan el tipado que requiere el componente Transfer
@@ -18,7 +17,7 @@ const targetKeys = ref<string[]>([]);
 // Columnas de la tabla que se mostrarán en ambos paneles del Transfer
 const tableColumns = [
   {
-    dataIndex: 'no_usuario',
+    dataIndex: 'name',
     title: 'Consultor',
   },
 
@@ -36,8 +35,8 @@ const onChange = (nextTargetKeys: string[]) => {
 };
 
 // Función personalizada para filtrar elementos en el Transfer
-const customFilterOption = (inputValue: string, item: Consultor): boolean => {
-  return item.no_usuario?.toLowerCase().includes(inputValue.toLowerCase())
+const customFilterOption = (inputValue: string, item: DataTransfer): boolean => {
+  return item.name?.toLowerCase().includes(inputValue.toLowerCase())
 };
 
 // Función para obtener la configuración de selección de filas en la tabla
@@ -46,6 +45,7 @@ const getRowSelection = ({
   selectedKeys,
   onItemSelectAll,
   onItemSelect,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: Record<string, any>) => {
   return {
     // Propiedades del checkbox
@@ -71,17 +71,16 @@ const getRowSelection = ({
   };
 };
 
-// Función para asignar las claves (keys) de los elementos seleccionados en la tabla derecha
-const assignTargetKeys = (data: number[]) => {
-  targetKeys.value = data.map((route) => route.toString()); // Convierte los IDs a strings y los asigna a targetKeys
-};
+// // Función para asignar las claves (keys) de los elementos seleccionados en la tabla derecha
+// const assignTargetKeys = (data: number[]) => {
+//   targetKeys.value = data.map((route) => route.toString()); // Convierte los IDs a strings y los asigna a targetKeys
+// };
 
 // Función para transformar los datos de entrada (Routes[]) en el formato requerido por el Transfer (DataTransfer[])
 const transformData = (data: Consultor[]) => {
   dataTransfer.value = data.map((consul) => ({
     key: consul.co_usuario, // Asigna el id como key
     name: consul.no_usuario, // Asigna el nombre
-
   }));
 };
 
@@ -106,15 +105,14 @@ watchEffect(() => transformData(props.data));
           onItemSelectAll,
           onItemSelect,
         })
-          " :columns="tableColumns" :data-source="filteredItems" size="small"
-          :style="{ pointerEvents: listDisabled ? 'none' : null }" :custom-row="({ key, disabled: itemDisabled }) => ({
+          " :pagination="{ pageSize: 5 }" :columns="tableColumns" :data-source="filteredItems" size="small"
+          :style="{ pointerEvents: listDisabled ? 'none' : null }" :custom-row="({ key }: { key: string }) => ({
             onClick: () => {
-              if (itemDisabled || listDisabled) return;
               onItemSelect(key, !selectedKeys.includes(key));
             },
           })
             " />
-      </template>
+      </template>n;
     </a-transfer>
   </div>
 </template>
