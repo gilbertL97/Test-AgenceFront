@@ -63,13 +63,13 @@ const columns = [
             <a-typography-text strong>Total</a-typography-text>
           </a-table-summary-cell>
           <a-table-summary-cell>
-            <a-typography-text strong>{{ formatBRL(data.total[3]).text }}</a-typography-text>
+            <a-typography-text strong>{{ formatBRL(data.total[0]).text }}</a-typography-text>
           </a-table-summary-cell>
           <a-table-summary-cell>
-            <a-typography-text strong>{{ formatBRL(data.total[3]).text }}</a-typography-text>
+            <a-typography-text strong>{{ formatBRL(data.total[1]).text }}</a-typography-text>
           </a-table-summary-cell>
           <a-table-summary-cell>
-            <a-typography-text strong>{{ formatBRL(data.total[3]).text }}</a-typography-text>
+            <a-typography-text strong>{{ formatBRL(data.total[2]).text }}</a-typography-text>
           </a-table-summary-cell>
           <a-table-summary-cell>
             <a-typography-text strong>{{ formatBRL(data.total[3]).text }}</a-typography-text>
