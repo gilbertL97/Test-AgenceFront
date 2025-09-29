@@ -15,7 +15,7 @@ defineProps<{
     <div v-if="isloading">
       <LoadingOutlined />
     </div>
-    <div v-else>
+    <div v-else class="pr-2 my-10">
       <div v-for="(item, index) in data" :key="index" class="mb-6">
         <TableRelatorio :data="item" />
       </div>
