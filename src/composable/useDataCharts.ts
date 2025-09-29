@@ -84,6 +84,7 @@ export function useDataCharts(userDataList: MaybeRef<UserData[]>) {
     }
 
     // --- Paso 5: Datasets de BARRAS (receita_liquida) ---
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const datasets: any[] = []
 
     for (const user of list) {
@@ -101,6 +102,7 @@ export function useDataCharts(userDataList: MaybeRef<UserData[]>) {
       datasets.push({
         type: 'bar',
         label: user.name,
+        order: 1, // ← detrás de la línea
         data,
         backgroundColor: color,
         borderColor: color,
@@ -113,9 +115,10 @@ export function useDataCharts(userDataList: MaybeRef<UserData[]>) {
     datasets.push({
       type: 'line',
       label: 'Média Salarial do Mês',
+      order: 0, // ← adelante
       data: avgSalaryData,
       borderColor: '#2c3e50',
-      backgroundColor: '#2cf3f0',
+      backgroundColor: '#2c3e50',
       borderWidth: 3,
       pointRadius: 4,
       pointBackgroundColor: '#2c3e50',
