@@ -7,6 +7,7 @@ import { useMenu } from './composable/useMenu';
 import type { Consultor, UserData } from './types/types';
 import { Constants } from './helpers/helper';
 import ChartsBar from './components/chartsBar.vue';
+import ChartPie from './components/chartPie.vue';
 
 const { items } = useMenu()
 const { loading, fetchData } = useFetch('/consultors');
@@ -52,6 +53,9 @@ onMounted(async () => {
       </div>
       <div v-if="action == Constants.GRAFICO">
         <ChartsBar :userDataList="relatorias ?? []" />
+      </div>
+      <div v-if="action == Constants.PIZZA">
+        <ChartPie :userDataList="relatorias ?? []" />
       </div>
     </div>
   </a-config-provider>

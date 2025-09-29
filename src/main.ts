@@ -12,12 +12,15 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement
+  LineElement,
+  ArcElement
 } from 'chart.js'
 
 ChartJS.register(Title,
   Tooltip,
   Legend,
+  ArcElement,
+
   BarElement,
   LineElement,
   PointElement,        // ← Obligatorio para líneas
