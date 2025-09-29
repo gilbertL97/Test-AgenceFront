@@ -14,7 +14,12 @@ const monthNames = [
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
 ];
 
-export const getMonthName = (month: number): string => {
+const monthAbNames = [
+  'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+export const getMonthName = (month: number, abv = false): string => {
+  if (abv) {
+    return month ? monthAbNames[month - 1] : '';
+  }
   return month ? monthNames[month - 1] : '';
 }
 
