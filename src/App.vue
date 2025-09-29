@@ -6,6 +6,7 @@ import { useFetch } from './composable/useFetch';
 import { useMenu } from './composable/useMenu';
 import type { Consultor, UserData } from './types/types';
 import { Constants } from './helpers/helper';
+import ChartsBar from './components/chartsBar.vue';
 
 const { items } = useMenu()
 const { loading, fetchData } = useFetch('/consultors');
@@ -48,6 +49,9 @@ onMounted(async () => {
       </div>
       <div v-if="action == Constants.RELATORIO" class="my-4">
         <RelatoriosPanel :isloading="loading" :data="relatorias ?? []" />
+      </div>
+      <div v-if="action == Constants.GRAFICO">
+        <ChartsBar :userDataList="relatorias ?? []" />
       </div>
     </div>
   </a-config-provider>
