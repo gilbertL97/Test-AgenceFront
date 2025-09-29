@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axiosInstance.defaults.headers.get.Accept = 'application/json';
 
-export function useFetch<T = never>(url: string) {
+export function useFetch(url: string) {
 
   const error = ref<string | null>(null);
   const loading = ref(false);
