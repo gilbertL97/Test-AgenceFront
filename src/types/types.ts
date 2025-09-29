@@ -2,7 +2,7 @@ export type Consultor = {
   co_usuario: string,
   no_usuario: string
 }
-type MonthlyData = {
+export type MonthlyData = {
   ano: number;
   mes: number;
   valor_total: number;
