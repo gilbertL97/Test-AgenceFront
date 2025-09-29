@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { Dayjs } from 'dayjs';
 import TransferCutsom from './transferCutsom.vue';
 import {
   ProjectOutlined,
   BarChartOutlined,
   PieChartOutlined
 } from '@ant-design/icons-vue';
-
+import dayjs from 'dayjs'
+import 'dayjs/locale/pt'
+dayjs.locale('pt')
 import type { Consultor } from '@/types/types';
-type RangeValue = [Dayjs, Dayjs];
-const dateRange = ref<RangeValue>();
+
+const dateRange = ref(['2007-01', '2007-01'])
 const selectedConsultors = ref<string[]>([]);
 defineProps<{
   isLoading: boolean;
@@ -39,7 +40,7 @@ const isButtonsEnabled = computed(() => {
 <template>
   <div class="ml-5">
     <div class="ml-15">
-      <a-range-picker v-model:value="dateRange" picker="month" format="MM/YYYY" valueFormat="YYYY-MM" />
+      <a-range-picker v-model:value="dateRange" picker="month" format="MMMM-YYYY" valueFormat="YYYY-MM" />
     </div>
     <div class="flex mt-2 items-center justify-center">
       <TransferCutsom :is-loading="isLoading" :data="data" @selected-consultors="verifiConsultors" />
