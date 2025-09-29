@@ -8,7 +8,7 @@ axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axiosInstance.defaults.headers.get.Accept = 'application/json';
 
 export function useFetch<T = never>(url: string) {
-  const data = ref<T | null>(null);
+
   const error = ref<string | null>(null);
   const loading = ref(false);
 
@@ -27,7 +27,7 @@ export function useFetch<T = never>(url: string) {
         requestConfig
       );
 
-      data.value = response.data;
+      return response.data;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       error.value = err.message || 'Error fetching data';
@@ -35,9 +35,5 @@ export function useFetch<T = never>(url: string) {
       loading.value = false;
     }
   };
-
-  // // Opcional: fetch automático al crear
-  fetchData();
-
-  return { data, error, loading, fetchData };
+  return { error, loading, fetchData };
 }
