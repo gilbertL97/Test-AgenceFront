@@ -5,6 +5,7 @@ import RelatoriosPanel from './components/relatoriosPanel..vue';
 import { useFetch } from './composable/useFetch';
 import { useMenu } from './composable/useMenu';
 import type { Consultor, UserData } from './types/types';
+import { Constants } from './helpers/helper';
 
 const { items } = useMenu()
 const { loading, fetchData } = useFetch('/consultors');
@@ -13,22 +14,13 @@ const relatorias = ref<UserData[]>();
 const value1 = ref('consultor');
 const action = ref('');
 
-const getUrlByActions = (action: string) => {
-  switch (action) {
-    case 'relatorio':
-      return '/relatoria';
-    case 'grafico':
-      return '/graph';
-    case 'pizza':
-      return '/pie';
-  }
-};
+
 
 
 const getActions = async (payload: { action: string; consultors: string[]; dateRange: string[]; }) => {
   action.value = payload.action;
-  const url = getUrlByActions(payload.action);
-  relatorias.value = await fetchData(url, {
+
+  relatorias.value = await fetchData('/relatoria', {
     idUsuarios: payload.consultors,
     startDate: payload.dateRange[0],
     endDate: payload.dateRange[1],
@@ -54,7 +46,7 @@ onMounted(async () => {
         <ConsultComponent v-if="value1 === 'consultor'" :is-loading="loading" :data="consultors ?? []"
           @action="getActions" />
       </div>
-      <div class="my-4">
+      <div v-if="action == Constants.RELATORIO" class="my-4">
         <RelatoriosPanel :isloading="loading" :data="relatorias ?? []" />
       </div>
     </div>
