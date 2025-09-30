@@ -1,6 +1,7 @@
 
 import { AppstoreOutlined, HomeOutlined, ScheduleOutlined, FormOutlined, TeamOutlined, UserOutlined, CloseSquareOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
+import { RouterLink } from 'vue-router';
 
 
 export function useMenu() {
@@ -51,8 +52,8 @@ export function useMenu() {
       title: 'Comercial',
       children: [
         {
-          type: 'group',
-          label: 'undefined',
+          key: 'comercial',
+          label: h(RouterLink, { to: { name: 'PerformanceComercial' } }, () => 'Performance Comercial'),
         },
       ]
     },
@@ -85,7 +86,7 @@ export function useMenu() {
     {
       key: 'app5',
       icon: () => h(CloseSquareOutlined),
-      label: 'Salir',
+      label: h(RouterLink, { to: { name: 'Home' } }, () => 'Salir'),
       title: 'Salir',
     },
 
