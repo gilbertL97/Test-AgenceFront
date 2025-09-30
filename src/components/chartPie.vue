@@ -77,15 +77,15 @@ const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    title: {
-      display: true,
-      text:
-        totalGeneral.value > 0
-          ? `RECEITA LÍQUIDA por consultores Total Geral: R$${totalGeneral.value}`
-          : 'RECEITA LÍQUIDA por consultores Sem dados',
-      font: { size: 18 },
-      padding: { top: 10, bottom: 20 }
-    },
+    // title: {
+    //   display: true,
+    //   text:
+    //     hasData.value
+    //       ? `RECEITA LÍQUIDA por consultores Total Geral: ${formatBRL(totalGeneral.value).text}`
+    //       : 'RECEITA LÍQUIDA por consultores Sem dado',
+    //   font: { size: 18 },
+    //   padding: { top: 10, bottom: 20 }
+    // },
     legend: { position: 'right' as const },
     tooltip: {
       callbacks: {
@@ -103,7 +103,11 @@ const chartOptions = {
 </script>
 
 <template>
-  <div>
+  <div class="py-8 mb-12">
+    <div class="my-4 text-center text-xl">
+      <h2 v-if="hasData">{{ `RECEITA LÍQUIDA por consultores Total Geral: ${formatBRL(totalGeneral).text}` }} </h2>
+      <h2 v-else>{{ 'RECEITA LÍQUIDA porconsultores Sem dado' }}</h2>
+    </div>
     <div v-if="hasData" class="chart-box">
       <Pie :data="chartData" :options="chartOptions" />
     </div>
