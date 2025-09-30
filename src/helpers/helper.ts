@@ -1,13 +1,21 @@
 export const formatBRL = (value: number | string): { text: string; color: string } => {
   const num = typeof value === 'string' ? parseFloat(value) : value;
   const cleanNum = isNaN(num) ? 0 : num;
-  const absValue = Math.abs(cleanNum).toFixed(2).replace('.', ',');
-  const displayText = cleanNum < 0 ? `-R$ ${absValue}` : `R$ ${absValue}`;
+
+  // Formatear con separadores de miles y decimales
+  const absValue = Math.abs(cleanNum);
+  const formattedValue = absValue.toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+  const displayText = cleanNum < 0 ? `-R$ ${formattedValue}` : `R$ ${formattedValue}`;
+
   return {
     text: displayText,
     color: cleanNum < 0 ? 'red' : 'inherit',
   };
-};
+}
 
 const monthNames = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
