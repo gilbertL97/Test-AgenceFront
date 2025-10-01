@@ -10,6 +10,7 @@ import type { Consultor, UserData } from '@/types/types';
 
 const { loading, fetchData } = useFetch('/consultors');
 const consultors = ref<Consultor[]>([]);
+const consultosrsLoading = ref(false);
 const relatorias = ref<UserData[]>();
 const action = ref('');
 const getActions = async (payload: { action: string; consultors: string[]; dateRange: string[]; }) => {
@@ -23,7 +24,9 @@ const getActions = async (payload: { action: string; consultors: string[]; dateR
 };
 const value1 = ref('consultor');
 onMounted(async () => {
+  consultosrsLoading.value = true;
   consultors.value = await fetchData<Consultor[]>() || [];
+  consultosrsLoading.value = false;
 });
 </script>
 <template>
@@ -35,7 +38,7 @@ onMounted(async () => {
       </a-radio-group>
     </div>
     <div class="my-4">
-      <ConsultComponent v-if="value1 === 'consultor'" :is-loading="loading" :data="consultors ?? []"
+      <ConsultComponent v-if="value1 === 'consultor'" :is-loading="consultosrsLoading" :data="consultors ?? []"
         @action="getActions" />
     </div>
     <div v-if="action == Constants.RELATORIO" class="my-4">
