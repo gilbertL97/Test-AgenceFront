@@ -15,7 +15,8 @@ import {
   PointElement,
   LineElement,
   ArcElement,
-  BarController
+  BarController,
+  LineController
 } from 'chart.js'
 
 ChartJS.register(Title,
@@ -24,6 +25,7 @@ ChartJS.register(Title,
   ArcElement,
   BarElement,
   BarController,
+  LineController,
   LineElement,
   PointElement,
   CategoryScale,
