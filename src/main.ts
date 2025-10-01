@@ -14,17 +14,18 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  ArcElement
+  ArcElement,
+  BarController
 } from 'chart.js'
 
 ChartJS.register(Title,
   Tooltip,
   Legend,
   ArcElement,
-
   BarElement,
+  BarController,
   LineElement,
-  PointElement,        // ← Obligatorio para líneas
+  PointElement,
   CategoryScale,
   LinearScale)
 const app = createApp(App);
